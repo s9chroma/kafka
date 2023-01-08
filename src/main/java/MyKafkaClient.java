@@ -12,14 +12,22 @@ public class MyKafkaClient {
             throw new RuntimeException(e);
         }
         // Create instances of the MyKafkaProducer and MyKafkaConsumer classes
-        try (MyKafkaProducer producer = new MyKafkaProducer("my-topic", props)) {
+        try (MyKafkaProducer producer = new MyKafkaProducer("testing", props)) {
 
             // Publish a message to the Kafka topic
-            producer.produce("Hello, Kafka!");
+            for(int i = 0; i < 1e2; i++)
+            {
+                producer.produce("Hello, Kafka!");
+            }
+
         }
-        try (MyKafkaConsumer consumer = new MyKafkaConsumer("my-topic", props)) {
+        try (MyKafkaConsumer consumer = new MyKafkaConsumer("testing", props)) {
             // Consume messages from the Kafka topic
-            consumer.consume();
+            // Publish a message to the Kafka topic
+            for(int i = 0; i < 1e2; i++)
+            {
+                consumer.consume();
+            }
         }
     }
 }
